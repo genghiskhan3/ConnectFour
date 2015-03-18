@@ -6,6 +6,7 @@
 using namespace std;
 
 class Grid{
+// All of the public methods used in the Grid class
 public:
 	Grid();
 	bool checkForWinner(char symbol);
@@ -14,8 +15,8 @@ public:
 	void insert(char symbol, int col);
 	bool validMove(int col);
 	bool stalemate();
-	bool firstComputerMove();
 
+// All of the private variables and methods used in the grid class
 private:
 	const int ROWS = 6;
 	const int COLS = 7;
@@ -25,12 +26,14 @@ private:
 
 };
 
-// Testted and it works
+// Grid constructor
+// Takes no paramaters and simply calls the initializeMatrix() method
 Grid::Grid(){
 	initializeMatrix();
 }
 
-// Tested and it works
+// Method to initialize the matrix
+// The matrix will initially be all '_' which will represent empty areas in the matrix
 void Grid::initializeMatrix(){
 	for (int r = 0; r < ROWS; r++){
 		for (int c = 0; c < COLS; c++){
@@ -39,15 +42,11 @@ void Grid::initializeMatrix(){
 	}
 }
 
-// Tested and it works
+// Method to display the current state of the matrix to the user
 void Grid::displayGrid(){
 	string output = "";
 	output += "    1  2  3  4  5  6  7\n\n";
 	for (int r = 0; r < ROWS; r++){
-		//ostringstream oss;
-		//int curRow = r + 1;
-		//oss << curRow;
-		//output += oss.str();
 		output += "    ";
 		for (int c = 0; c < COLS; c++){
 			output += matrix[r][c];
@@ -58,7 +57,8 @@ void Grid::displayGrid(){
 	cout << output << endl;
 }
 
-// Tested and it all works
+// Algorithm to check for a winner on the grid
+// Implements the DFS algorithm to check for any runs of four within the matrix
 bool Grid::checkForWinner(char symbol){
 	int dx[] = { 1, -1, 0, 0, 1, -1, -1, 1 };
 	int dy[] = { 0, 0, 1, -1, 1, 1, -1, -1 };
@@ -108,7 +108,9 @@ bool Grid::checkForWinner(char symbol){
 	return found;
 }
 
-// Tested and it works correctly
+// Method used only by the checkForWinner() method
+// It simply returns the angle of the next possible move
+// This is used to ensure that the DFS algorithm continues in the same direction when searching for a set of 4
 int Grid::directionFinder(int x, int y){
 	if (x == 1 && y == 0){
 		return 0;
@@ -137,7 +139,7 @@ int Grid::directionFinder(int x, int y){
 }
 
 
-// Tested and it works
+// Method to check to see if the grid is empty
 bool Grid::isEmpty(){
 	bool empty = true;
 	for (int r = 0; r < ROWS; r++){
@@ -151,7 +153,10 @@ bool Grid::isEmpty(){
 	return empty;
 }
 
-// Tested and works correctly
+// Method to check to see if the users input is a valid move choice
+// Checks:
+// Choice is within the range of 1-7
+// The current column is not already full
 bool Grid::validMove(int col){
 	col--;
 	bool valid = false;
@@ -165,7 +170,8 @@ bool Grid::validMove(int col){
 	return valid;
 }
 
-//Tested and works correctly
+// Method to insert the user input into the matrix
+// Starts from the bottom of the coulumn to mimic gravity and the games core concepts
 void Grid::insert(char symbol, int col){
 	col--;
 	for (int r = ROWS - 1; r >= 0; r--){
@@ -176,29 +182,16 @@ void Grid::insert(char symbol, int col){
 	}
 }
 
-// Tested and works correctly
+// Method to check to see if their is a stalemate 
+// Essentially searches the grid to make sure there is no empty space
+// Only have to search the first row because of the concept of gravity again
 bool Grid::stalemate(){
 	bool stale = true;
-	for (int r = 0; r < ROWS; r++){
-		for (int c = 0; c < COLS; c++){
-			if (matrix[r][c] == '_'){
-				stale = false;
-				return stale;
-			}
+	for (int c = 0; c < COLS; c++){
+		if (matrix[0][c] == '_'){
+			stale = false;
+			return stale;
 		}
 	}
 	return stale;
 }
-
-// Not neccessary now
-bool Grid::firstComputerMove(){
-	int i = 0;
-	for (int c = 0; c < COLS; c++){
-		if (matrix[ROWS - 1][c] != '_') i++;
-	}
-	if (i == 1) return true;
-	else return false;
-}
-
-
-
