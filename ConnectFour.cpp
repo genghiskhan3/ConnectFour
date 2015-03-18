@@ -14,12 +14,15 @@ int main(){
 	string playerTwoName;
 	bool validInfoFields = false;
 	while (!validInfoFields){
+		string tempSymbol;
 		cout << "Player one, please choose a one character symbol that you would like to represent your pieces with: ";
-		cin >> playerOneSymbol;
+		cin >> tempSymbol;
+		playerOneSymbol = tempSymbol[0];
 		cout << "\nPlayer one, please enter your first name: ";
 		cin >> playerOneName;
 		cout << "\nPlayer two, please choose a one character symbol that you would like to represent your pieces with: ";
-		cin >> playerTwoSymbol;
+		cin >> tempSymbol;
+		playerTwoSymbol = tempSymbol[0];
 		cout << "\nPlayer two, please enter your first name: ";
 		cin >> playerTwoName;
 
