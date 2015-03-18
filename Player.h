@@ -10,7 +10,7 @@ public:
 	char getSymbol();
 	void requestMove();
 
-// Private variables and names
+// Private variables and methods
 private:
 	const char symbol;
 	const string name;
