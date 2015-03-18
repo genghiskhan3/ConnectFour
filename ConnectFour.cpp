@@ -82,5 +82,5 @@ int main(){
 
 	if (playerOnesTurn && !stale) cout << "\n\nCONGRATULATIONS " << playerOne.getName() << " you are the winner" << endl;
 	else if(!playerOnesTurn && !stale) cout << "\n\nCONGRATULATIONS " << playerTwo.getName() << " you are the winner" << endl;
-	else cout << "\n\The match ends in a draw" << endl;
+	else cout << "\nThe match ends in a draw" << endl;
 }
