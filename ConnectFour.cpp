@@ -74,8 +74,6 @@ int main(){
 				valid = false;
 
 			if (!valid) cout << "\nSorry that is not a valid move, please enter a new move\n";
-			
-
 		}
 
 		// Inserts the players move into the grid
