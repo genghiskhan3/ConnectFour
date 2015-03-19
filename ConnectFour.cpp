@@ -16,15 +16,15 @@ int main(){
 	while (!validInfoFields){
 		string tempSymbol;
 		cout << "Player one, please choose a one character symbol that you would like to represent your pieces with: ";
-		cin >> tempSymbol;
+		getline(cin, tempSymbol);
 		playerOneSymbol = tempSymbol[0];
-		cout << "\nPlayer one, please enter your first name: ";
-		cin >> playerOneName;
+		cout << "\nPlayer one, please enter your name: ";
+		getline(cin, playerOneName);
 		cout << "\nPlayer two, please choose a one character symbol that you would like to represent your pieces with: ";
-		cin >> tempSymbol;
+		getline(cin, tempSymbol);
 		playerTwoSymbol = tempSymbol[0];
-		cout << "\nPlayer two, please enter your first name: ";
-		cin >> playerTwoName;
+		cout << "\nPlayer two, please enter your name: ";
+		getline(cin, playerTwoName);
 
 		if (playerOneSymbol == '_' || playerTwoSymbol == '_') cout << "\n\nSorry that is not an acceptable symbol\n\n\n\n";
 		else if (playerOneName.compare(playerTwoName) == 0 || playerOneSymbol == playerTwoSymbol) cout << "\n\nSorry you can not have matching names or symbols\n\n\n\n";
