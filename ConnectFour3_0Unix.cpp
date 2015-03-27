@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #define NOMINMAX
-#include <windows.h>
+#include <unistd.h>
 #include "Grid.h"
 #include "Player.h"
 #include "VariablePrint.h"
@@ -35,7 +35,7 @@ int main(){
 	varPrint.endLine(); varPrint.endLine();
 
 
-	Sleep(1000);
+	usleep(1000);
 
 	// boolean statements used to determine the flow of the program
 	bool twoPlayer = true;
@@ -55,7 +55,7 @@ int main(){
 			varPrint.setString("Sorry that is not an acceptable input, please try again");
 			varPrint.mediumPrint();
 			varPrint.endLine(); varPrint.endLine(); varPrint.endLine();
-			Sleep(1500);
+			usleep(1500);
 		}
 		else if (atoi(pChoice.c_str()) == 1){
 			varPrint.endLine(); varPrint.endLine();
@@ -105,14 +105,14 @@ int main(){
 				varPrint.setString("Sorry that is not an acceptable symbol, please try again");
 				varPrint.mediumPrint();
 				varPrint.endLine(); varPrint.endLine(); varPrint.endLine();
-				Sleep(500);
+				usleep(500);
 			}
 			else if (playerOneName.compare(playerTwoName) == 0 || playerOneSymbol == playerTwoSymbol){
 				varPrint.endLine();
 				varPrint.setString("Sorry you can not have matching names or symbols, please try again");
 				varPrint.mediumPrint();
 				varPrint.endLine(); varPrint.endLine(); varPrint.endLine();
-				Sleep(500);
+				usleep(500);
 			}
 			else{ 
 				validInfoFields = true;
@@ -185,7 +185,7 @@ int main(){
 					varPrint.setString("Sorry that is not a valid move, please enter a new move");
 					varPrint.mediumPrint();
 					varPrint.endLine();
-					Sleep(1000);
+					usleep(1000);
 				}
 			}
 
@@ -193,7 +193,7 @@ int main(){
 			grid.insert(curSymbol, move);
 
 			// neatly displays the grid
-			Sleep(1000);
+			usleep(1000);
 			cout << "\n\n\n";
 			//varPrint.printGrid(grid);
 			grid.displayGrid();
@@ -201,7 +201,7 @@ int main(){
 			varPrint.setString(curName + " chose column " + (to_string(move)) + " this turn");
 			varPrint.mediumPrint();
 			varPrint.endLine(); varPrint.endLine();
-			Sleep(1000);
+			usleep(1000);
 			
 
 			// Checks every iteration to see if there is a draw
@@ -276,21 +276,21 @@ int main(){
 				varPrint.setString("Sorry that is the computers symbol, please select again");
 				varPrint.mediumPrint();
 				varPrint.endLine(); varPrint.endLine(); varPrint.endLine();
-				Sleep(1000);
+				usleep(1000);
 			}
 			else if (playerOneSymbol == '_'){
 				varPrint.endLine(); varPrint.endLine();
 				varPrint.setString("Sorry that is not an acceptable symbol, please select agian");
 				varPrint.mediumPrint();
 				varPrint.endLine(); varPrint.endLine(); varPrint.endLine();
-				Sleep(1000);
+				usleep(1000);
 			}
 			else if (playerOneName.compare("The Computer") == 0){
 				varPrint.endLine(); varPrint.endLine();
 				varPrint.setString("Sorry that is the computers name");
 				varPrint.mediumPrint();
 				varPrint.endLine(); varPrint.endLine(); 
-				Sleep(1000);
+				usleep(1000);
 			}
 			else{
 				validInfoFields = true;
@@ -336,39 +336,39 @@ int main(){
 				int difficulty = atoi(getDifficulty.c_str());
 				if (difficulty == 1){
 					level = 1;
-					Sleep(500);
+					usleep(500);
 					varPrint.endLine(); varPrint.endLine();
 					varPrint.setString("You have chosen to play on easy, good luck");
 					varPrint.mediumPrint();
 					varPrint.endLine(); varPrint.endLine(); varPrint.endLine();
-					Sleep(500);
+					usleep(500);
 				}
 				else if (difficulty == 2){
 					level = 3;
-					Sleep(500);
+					usleep(500);
 					varPrint.endLine(); varPrint.endLine();
 					varPrint.setString("You have chosen to play on medium, good luck");
 					varPrint.mediumPrint();
 					varPrint.endLine(); varPrint.endLine(); varPrint.endLine();
-					Sleep(500);
+					usleep(500);
 				}
 				else if (difficulty == 3){
 					level = 5;
-					Sleep(500);
+					usleep(500);
 					varPrint.endLine(); varPrint.endLine();
 					varPrint.setString("You have chosen to play on hard, good luck");
 					varPrint.mediumPrint();
 					varPrint.endLine(); varPrint.endLine(); varPrint.endLine();
-					Sleep(500);
+					usleep(500);
 				}
 				else {
 					level = 6;
-					Sleep(500);
+					usleep(500);
 					varPrint.endLine(); varPrint.endLine();
 					varPrint.setString("You have chosen to play on impossible, good luck");
 					varPrint.mediumPrint();
 					varPrint.endLine(); varPrint.endLine(); varPrint.endLine();
-					Sleep(500);
+					usleep(500);
 				}
 				validDifficulty = true;
 			}
@@ -377,7 +377,7 @@ int main(){
 				varPrint.setString("Sorry that is not a valid input, please try again");
 				varPrint.mediumPrint();
 				varPrint.endLine(); varPrint.endLine();
-				Sleep(500);
+				usleep(500);
 			}
 		}
 
@@ -441,7 +441,7 @@ int main(){
 						varPrint.setString("Sorry that is not a valid move, please enter a new move");
 						varPrint.mediumPrint();
 						varPrint.endLine();
-						Sleep(1000);
+						usleep(1000);
 					}
 				}
 			}
@@ -451,20 +451,20 @@ int main(){
 					varPrint.setString("It is the computers turn to make a move");
 					varPrint.mediumPrint();
 					varPrint.endLine();
-					Sleep(500);
+					usleep(500);
 					varPrint.setString("The computer is thinking");
 					varPrint.mediumPrint();
-					Sleep(1000);
+					usleep(1000);
 					cout << "....";
-					Sleep(1000);
+					usleep(1000);
 					cout << "....";
-					Sleep(1000);
+					usleep(1000);
 					cout << "....";
-					Sleep(1000);
+					usleep(1000);
 					cout << "....";
-					Sleep(1000);
+					usleep(1000);
 					cout << "....";
-					Sleep(1000);
+					usleep(1000);
 					cout << "....\n";
 				}
 				else{
@@ -472,12 +472,12 @@ int main(){
 					varPrint.setString("It is the computers turn to make a move");
 					varPrint.mediumPrint();
 					varPrint.endLine();
-					Sleep(500);
+					usleep(500);
 					varPrint.setString("The computer is thinking");
 					varPrint.mediumPrint();
-					Sleep(1000);
+					usleep(1000);
 					cout << "....";
-					Sleep(1000);
+					usleep(1000);
 					cout << "....\n";
 				}
 				move = grid.findMoveAI();
@@ -490,14 +490,14 @@ int main(){
 
 			// There are two different display methods, one for the computer and the other for the player
 			if(!playerOnesTurn){
-				Sleep(500);
+				usleep(500);
 				cout << "\n\n\n\n";
 				grid.displayGrid();
 				cout << "\n";
 				varPrint.setString("The Computer chose column " + (to_string(move)) + " this turn");
 				varPrint.mediumPrint();
 				varPrint.endLine(); varPrint.endLine();
-				Sleep(1000);
+				usleep(1000);
 			}
 			else{
 				cout << "\n\n\n";
@@ -506,7 +506,7 @@ int main(){
 				varPrint.setString(curName + " chose column " + (to_string(move)) + " this turn");
 				varPrint.mediumPrint();
 				varPrint.endLine(); varPrint.endLine();
-				Sleep(1000);
+				usleep(1000);
 			}
 
 
