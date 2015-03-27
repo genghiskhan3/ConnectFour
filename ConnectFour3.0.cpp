@@ -6,7 +6,7 @@
 #include <windows.h>
 #include "Grid.h"
 #include "Player.h"
-#include "VariablePrint.h";
+#include "VariablePrint.h"
 using namespace std;
 
 int main(){
@@ -126,7 +126,7 @@ int main(){
 
 
 		// This block of code randomly selects which player will go first by using random numbers
-		srand(time(NULL));
+		srand((unsigned int)time(NULL));
 		bool playerOnesTurn = true;
 		if ((rand() % 100) % 2 == 0){ 
 			playerOnesTurn = false; 
@@ -387,7 +387,7 @@ int main(){
 
 
 		// Randomly select who has the first turn, either the player or the computer
-		srand(time(NULL));
+		srand((unsigned int)time(NULL));
 		bool playerOnesTurn = true;
 		if ((rand() % 100) % 2 == 0){ 
 			playerOnesTurn = false; 
