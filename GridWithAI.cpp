@@ -7,9 +7,10 @@
 using namespace std;
 
 class Grid{
-// All of the public methods used in the Grid class
+	// All of the public methods used in the Grid class
 public:
 	Grid();
+	Grid(char playerSymbol);
 	bool checkForWinner(char symbol);
 	void displayGrid();
 	bool isEmpty();
@@ -19,7 +20,7 @@ public:
 	int findMoveAI();
 	void undoMove(int col);
 
-// All of the private variables and methods used in the grid class
+	// All of the private variables and methods used in the grid class
 private:
 	const int ROWS = 6;
 	const int COLS = 7;
@@ -27,12 +28,13 @@ private:
 	void initializeMatrix();
 	int directionFinder(int x, int y);
 	const int WIN_VALUE = numeric_limits<int>::max();
-	const int LOSE_VALUE = numeric_limits<int>::min();
+	const int LOSS_VALUE = numeric_limits<int>::min();
 	const int UNCERTAIN_VALUE = 0;
 	const char AISymbol = '@';
 	double moveValue(int col);
-	double maxmin(int depth, int alpha, int beta,bool maximizingPlayer);
+	double maxmin(int depth, int alpha, int beta, bool maximizingPlayer);
 	double moveValue(int col);
+	double maxmin(int depth, double alpha, double beta, bool maximizingPlayer);
 	char playerSymbol;
 
 };
@@ -105,7 +107,8 @@ bool Grid::checkForWinner(char symbol){
 								q.push(next);
 							}
 						}
-					} else{
+					}
+					else{
 						for (int i = 0; i < 8; i++){
 							int newx = current.getRow() + dx[i];
 							int newy = current.getCol() + dy[i];
@@ -178,9 +181,11 @@ bool Grid::validMove(int col){
 	bool valid = false;
 	if (col >= COLS || col < 0){
 		valid = false;
-	} else if (matrix[0][col] == '_'){
+	}
+	else if (matrix[0][col] == '_'){
 		valid = true;
-	} else{
+	}
+	else{
 		valid = false;
 	}
 	return valid;
@@ -225,7 +230,7 @@ bool Grid::stalemate(){
 int Grid::findMoveAI(){
 	double maxVal = numeric_limits<int>::min();
 	int move = 0;
-	
+
 	for (int c = 1; c <= COLS; c++){
 		if (validMove(c)){
 			double curVal = moveValue(c);
@@ -240,11 +245,11 @@ int Grid::findMoveAI(){
 	}
 }
 
-double Grid::moveVaule(int col){
+double Grid::moveValue(int col){
 	insert(AISymbol, col);
-	
-	double curVal = maxmin(4, numeric_limits<int>::min(), numeri_limits<int>::max(), false);
-	
+
+	double curVal = maxmin(4, numeric_limits<int>::min(), numeric_limits<int>::max(), false);
+
 	undoMove(col);
 	return curVal;
 }
@@ -265,12 +270,12 @@ double Grid::maxmin(int depth, double alpha, double beta, bool maximizingPlayer)
 		else{
 			score = UNCERTAIN_VALUE;
 		}
-		return score / (MAX_DEPTH - depth + 1);
+		return score / (4 - depth + 1);
 	}
 
 	if (maximizingPlayer){
 		for (int c = 1; c <= COLS; c++){
-			if (grid->validMove(c)){
+			if (validMove(c)){
 				insert(AISymbol, c);
 				alpha = fmax(alpha, maxmin(depth - 1, alpha, beta, false));
 				undoMove(c);
